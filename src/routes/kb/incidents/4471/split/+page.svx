@@ -1,0 +1,74 @@
+---
+layout: runbook
+title: '#4471 split · three problems, three tickets'
+owner: support desk
+status: open
+reviewed: 2026-10-28
+signature: Wojciech Czaplejewicz (yazon), with Claude Code
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/yazon/support-kb-4471/issues';
+  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) says: one issue, one fix queued. It was merged on subject lines
+([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and every subject says "wrong day". Read by
+tenant, by channel and by what each report says, it holds three problems. The queued parser fix
+closes one of them.
+
+<Callout kind="warn">
+#4471 is not one bug. The queued fix leaves two problems open, each with a ticket of its own below.
+</Callout>
+
+## One ticket per problem
+
+<ProblemTable ticket={4471} {tickets} />
+
+## parser: the shared parser reads month first
+
+Every tenant in #4471 writes the day first. The shared parser reads every date month first, so day
+and month come out swapped: "Booked for 2 December. The invite says 12 February." It reaches people
+through the app, by email and through booking-v2's form.
+
+**Fix:** parse dates in the tenant's locale. This is the fix that is queued.
+
+## hint: booking-v3 asks for the month first
+
+Same symptom, different code. booking-v3 prints `MM/DD/YYYY` under its date field. People at a
+day-first tenant type what the hint tells them, and the form reads it day first, the tenant's way.
+Only reports through booking-v3's form, from the tenants that run it.
+
+**Fix:** print the tenant's order under the field, as booking-v2 does. The parser fix does not touch
+this form.
+
+## one-day: dates move by one day
+
+A swap of day and month cannot move a date by one day, and these reports describe exactly that:
+
+- "Invite says Tuesday 12 May. Calendar says Monday 11 May."
+- "Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting."
+- "Tuesday 6 October showed as Monday."
+
+The desk read them as a one-day move (`desk-notes.json`), but [CauseTable](/kb/incidents/4471) still
+counts them under `parser` by tenant. The Lisbon and Toronto report points at a time zone: a date
+turned into an instant and back in the wrong zone.
+
+**Fix:** investigate separately. The parser fix will not move these dates back.
+
+## How the counts are made
+
+`#lib/kb/problems.ts`: one report per id; the problem is the cause its tenant gives it
+(`causes.ts`), except reports the desk read as a one-day move, which come out of their cause. Intake's
+tags are not used: they are guessed from the reporter's browser.
+
+## Lessons
+
+- Same subject is not same cause. Merge by cause, and read the body before you call a ticket known.
+- A footnote under a table is a ticket nobody filed.
+
+<RenderStamp {signature} />
