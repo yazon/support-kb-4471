@@ -4,7 +4,7 @@ title: '#4471 split · three problems, three tickets'
 owner: support desk
 status: open
 reviewed: 2026-10-28
-signature: Wojciech Czaplejewicz (yazon), with Claude Code
+signature: Wojciech Czaplejewicz
 ---
 
 <script>
@@ -85,5 +85,7 @@ used: they are guessed from the reporter's browser.
 
 - Same subject is not same cause. Merge by cause, and read the body before you call a ticket known.
 - A footnote under a table is a ticket nobody filed.
+
+Written with Claude Code.
 
 <RenderStamp {signature} />
