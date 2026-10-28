@@ -12,8 +12,11 @@ signature: Wojciech Czaplejewicz (yazon), with Claude Code
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
-  const repo = 'https://github.com/yazon/support-kb-4471/issues';
-  const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+  const tickets = {
+    parser: 'https://github.com/yazon/support-kb-4471/issues/1',
+    hint: 'https://github.com/yazon/support-kb-4471/issues/2',
+    'one-day': 'https://github.com/yazon/support-kb-4471/issues/3',
+  };
   const states = { parser: 'closed: fixed', hint: "closed: won't fix", 'one-day': 'open' };
 </script>
 
@@ -31,6 +34,12 @@ of fixed. That settles two of the three problems. Nothing in that update touches
 ## One ticket per problem
 
 <ProblemTable ticket={4471} {tickets} {states} />
+
+The tickets:
+
+- [support-kb-4471#1](https://github.com/yazon/support-kb-4471/issues/1) · `parser`
+- [support-kb-4471#2](https://github.com/yazon/support-kb-4471/issues/2) · `hint`
+- [support-kb-4471#3](https://github.com/yazon/support-kb-4471/issues/3) · `one-day`
 
 ## parser: the shared parser reads month first
 

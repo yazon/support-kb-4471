@@ -9,11 +9,11 @@
 		<link href="../../../_app/immutable/chunks/B2Ul7l_u.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BCPXOG7W.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/Dh1V97Jm.js" rel="modulepreload">
-		<link href="../../../_app/immutable/entry/app.BPf66j0r.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.C8ZodgXy.js" rel="modulepreload">
 		<link href="../../../_app/immutable/nodes/0.C9KfiiPz.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/DK3Fl9T5.js" rel="modulepreload">
-		<link href="../../../_app/immutable/nodes/5.DHk1eGA7.js" rel="modulepreload">
-		<link href="../../../_app/immutable/chunks/DvTG5Ace.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/5.D8P8BH3-.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Dhpe4FuT.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BTPwLomz.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/CVBzP17p.js" rel="modulepreload">
 		<link href="../../../_app/immutable/chunks/BIy4WKJS.js" rel="modulepreload">
@@ -27,7 +27,7 @@
 (<a href="/kb/decisions/0001-dedupe-by-subject">decision 0001</a>), and every subject says “wrong day”. Read by
 tenant, by channel and by what each report says, it holds three problems.</p> <p>Engineering closed #4471 on 5 October: the parser is fixed, and booking-v3’s form is retired instead
 of fixed. That settles two of the three problems. Nothing in that update touches the third.</p> <aside class="warn svelte-17bri61"><!---->#4471 is closed, but its reports are not all answered: dates that move by one day are still open.<!----></aside><!----> <h2>One ticket per problem</h2> <p class="sum svelte-1op6c6"><strong>412</strong> reports merged into #4471 · <strong>3</strong> problems</p> <table><thead><tr><th>problem</th><th>what the reports say</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th><th>state</th></tr></thead><tbody><!--[--><tr><td><code>parser</code></td><td>day and month swapped: the shared parser reads month first</td><td>379</td><td>11</td><td>2026-04-01 → 2026-10-04</td><td><!--[0--><a href="https://github.com/yazon/support-kb-4471/issues/1">support-kb-4471#1</a><!--]--></td><td>closed: fixed</td></tr><tr><td><code>hint</code></td><td>day and month swapped: the booking-v3 form asks for the month first</td><td>33</td><td>3</td><td>2026-04-17 → 2026-09-22</td><td><!--[0--><a href="https://github.com/yazon/support-kb-4471/issues/2">support-kb-4471#2</a><!--]--></td><td>closed: won't fix</td></tr><tr><td><code>one-day</code></td><td>date moved by one day</td><td>5</td><td>5</td><td>2026-04-02 → 2026-10-04</td><td><!--[0--><a href="https://github.com/yazon/support-kb-4471/issues/3">support-kb-4471#3</a><!--]--></td><td>open</td></tr><!--]--></tbody></table> <!--[--><!--[0--><p class="note svelte-1op6c6">5 of the <code>parser</code> reports read as a one-day move: counted where they're filed, and filed again as <code>one-day</code>.</p><!--]--><!--[-1--><!--]--><!--]--> <p class="note svelte-1op6c6">Counted once per report id: the export holds 427 rows for 412 reports. Intake's tag names
-  a different cause than the tenant on 38 of them.</p><!----> <h2>parser: the shared parser reads month first</h2> <p>Every tenant in #4471 writes the day first. The shared parser reads every date month first, so day
+  a different cause than the tenant on 38 of them.</p><!----> <p>The tickets:</p> <ul><li><a href="https://github.com/yazon/support-kb-4471/issues/1" rel="nofollow">support-kb-4471#1</a> · <code>parser</code></li> <li><a href="https://github.com/yazon/support-kb-4471/issues/2" rel="nofollow">support-kb-4471#2</a> · <code>hint</code></li> <li><a href="https://github.com/yazon/support-kb-4471/issues/3" rel="nofollow">support-kb-4471#3</a> · <code>one-day</code></li></ul> <h2>parser: the shared parser reads month first</h2> <p>Every tenant in #4471 writes the day first. The shared parser reads every date month first, so day
 and month come out swapped: “Booked for 2 December. The invite says 12 February.” It reaches people
 through the app, by email and through booking-v2’s form.</p> <p><strong>Fixed:</strong> <code>fix(dates): parse dd/mm for eu locales</code>, with #4471 closed on 5 October. Ticket closed as
 completed.</p> <h2>hint: booking-v3 asks for the month first</h2> <p>Same symptom, different code. booking-v3 prints <code>MM/DD/YYYY</code> under its date field. People at a
@@ -43,16 +43,16 @@ used: they are guessed from the reporter’s browser.</p> <h2>Lessons</h2> <ul><
 			
 			<script>
 				{
-					__sveltekit_16x06mq = {
+					__sveltekit_1qf4gvz = {
 						base: new URL("../../..", location).pathname.slice(0, -1),
-						version: "1793193586568"
+						version: "1793193885019"
 					};
 
 					const element = document.currentScript.parentElement;
 
 					import("../../../_app/immutable/entry/start.CH5w6lId.js").then(async (kit) => {
-						kit.init(__sveltekit_16x06mq);
-						const app = await import("../../../_app/immutable/entry/app.BPf66j0r.js");
+						kit.init(__sveltekit_1qf4gvz);
+						const app = await import("../../../_app/immutable/entry/app.C8ZodgXy.js");
 						kit.start(app, element, {
 							node_ids: [0, 5],
 							data: [null,null],
