@@ -4,7 +4,7 @@ title: '#4471 split · three problems, three tickets'
 owner: support desk
 status: open
 reviewed: 2026-10-28
-signature: Wojciech Czaplejewicz
+signature: v1.eyJzdWIiOiIyODQ3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTY3NTQsImV4cCI6MTc5MzI4MzE1NH0.Wzls9z9itg7P1uW6QRx8p76w5rfC4PviT9bCr6SJECQ
 ---
 
 <script>
