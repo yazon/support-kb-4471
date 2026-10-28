@@ -54,17 +54,18 @@ A swap of day and month cannot move a date by one day, and these reports describ
 - "Client in Lisbon got Tuesday. Client in Toronto got Monday. Same meeting."
 - "Tuesday 6 October showed as Monday."
 
-The desk read them as a one-day move (`desk-notes.json`), but [CauseTable](/kb/incidents/4471) still
-counts them under `parser` by tenant. The Lisbon and Toronto report points at a time zone: a date
-turned into an instant and back in the wrong zone.
+The desk read them as a one-day move (`desk-notes.json`). [CauseTable](/kb/incidents/4471) files
+them under `parser` by tenant, with a footnote; nothing else ever came of the footnote. The Lisbon and
+Toronto report points at a time zone: a date turned into an instant and back in the wrong zone.
 
 **Fix:** investigate separately. The parser fix will not move these dates back.
 
 ## How the counts are made
 
-`#lib/kb/problems.ts`: one report per id; the problem is the cause its tenant gives it
-(`causes.ts`), except reports the desk read as a one-day move, which come out of their cause. Intake's
-tags are not used: they are guessed from the reporter's browser.
+With the desk's own view, as CauseTable counts: one report per id, each counted under the cause its
+tenant and channel give it (`causes.ts`). The reports the desk read as a one-day move stay counted
+where they're filed, under `parser`, and are the one-day ticket's count as well. Intake's tags are not
+used: they are guessed from the reporter's browser.
 
 ## Lessons
 
