@@ -14,20 +14,23 @@ signature: Wojciech Czaplejewicz (yazon), with Claude Code
 
   const repo = 'https://github.com/yazon/support-kb-4471/issues';
   const tickets = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+  const states = { parser: 'closed: fixed', hint: "closed: won't fix", 'one-day': 'open' };
 </script>
 
 [#4471](/kb/incidents/4471) says: one issue, one fix queued. It was merged on subject lines
 ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and every subject says "wrong day". Read by
-tenant, by channel and by what each report says, it holds three problems. The queued parser fix
-closes one of them.
+tenant, by channel and by what each report says, it holds three problems.
+
+Engineering closed #4471 on 5 October: the parser is fixed, and booking-v3's form is retired instead
+of fixed. That settles two of the three problems. Nothing in that update touches the third.
 
 <Callout kind="warn">
-#4471 is not one bug. The queued fix leaves two problems open, each with a ticket of its own below.
+#4471 is closed, but its reports are not all answered: dates that move by one day are still open.
 </Callout>
 
 ## One ticket per problem
 
-<ProblemTable ticket={4471} {tickets} />
+<ProblemTable ticket={4471} {tickets} {states} />
 
 ## parser: the shared parser reads month first
 
@@ -35,7 +38,8 @@ Every tenant in #4471 writes the day first. The shared parser reads every date m
 and month come out swapped: "Booked for 2 December. The invite says 12 February." It reaches people
 through the app, by email and through booking-v2's form.
 
-**Fix:** parse dates in the tenant's locale. This is the fix that is queued.
+**Fixed:** `fix(dates): parse dd/mm for eu locales`, with #4471 closed on 5 October. Ticket closed as
+completed.
 
 ## hint: booking-v3 asks for the month first
 
@@ -43,8 +47,8 @@ Same symptom, different code. booking-v3 prints `MM/DD/YYYY` under its date fiel
 day-first tenant type what the hint tells them, and the form reads it day first, the tenant's way.
 Only reports through booking-v3's form, from the tenants that run it.
 
-**Fix:** print the tenant's order under the field, as booking-v2 does. The parser fix does not touch
-this form.
+**Won't fix:** booking-v3's form is retired. The parser fix does not touch this form, so these reports
+end with the form, not with a fix. Ticket closed as not planned.
 
 ## one-day: dates move by one day
 
@@ -58,7 +62,8 @@ The desk read them as a one-day move (`desk-notes.json`). [CauseTable](/kb/incid
 them under `parser` by tenant, with a footnote; nothing else ever came of the footnote. The Lisbon and
 Toronto report points at a time zone: a date turned into an instant and back in the wrong zone.
 
-**Fix:** investigate separately. The parser fix will not move these dates back.
+**Open:** neither the parser fix nor retiring booking-v3 moves a date back by one day. Investigate the
+time-zone handling of invite dates; the ticket stays open until then.
 
 ## How the counts are made
 

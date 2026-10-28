@@ -6,8 +6,12 @@
 
   // The desk's own view (CauseTable): a report counts where it is filed. The reports the desk read as
   // a one-day move stay counted under their cause, and get a ticket of their own as well.
-  // tickets: the ticket each problem is filed as, problem → URL.
-  let { ticket, tickets = {} }: { ticket: number; tickets?: Record<string, string> } = $props();
+  // tickets: the ticket each problem is filed as, problem → URL. states: where each ticket stands, in words.
+  let {
+    ticket,
+    tickets = {},
+    states = {},
+  }: { ticket: number; tickets?: Record<string, string>; states?: Record<string, string> } = $props();
 
   const rows = $derived((reports as Report[]).filter((r) => r.mergedInto === ticket));
   const merged = $derived(uniqueById(rows));
@@ -41,7 +45,7 @@
 
 <table>
   <thead>
-    <tr><th>problem</th><th>what the reports say</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th></tr>
+    <tr><th>problem</th><th>what the reports say</th><th>reports</th><th>tenants</th><th>seen</th><th>ticket</th><th>state</th></tr>
   </thead>
   <tbody>
     {#each problems as p (p.problem)}
@@ -52,6 +56,7 @@
         <td>{p.tenants}</td>
         <td>{p.seen}</td>
         <td>{#if tickets[p.problem]}<a href={tickets[p.problem]}>{label(tickets[p.problem])}</a>{:else}none yet{/if}</td>
+        <td>{states[p.problem] ?? ''}</td>
       </tr>
     {/each}
   </tbody>
